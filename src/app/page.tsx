@@ -8,6 +8,7 @@ import Cover from "@/components/Cover";
 import Hero from "@/components/Hero";
 import Countdown from "@/components/Countdown";
 import Details from "@/components/Details";
+import Location from "@/components/Location";
 import Rsvp from "@/components/Rsvp";
 import FallingPetals from "@/components/FallingPetals";
 import { wedding } from "@/lib/config";
@@ -33,6 +34,7 @@ export default function Home() {
               <Hero />
               <Countdown />
               <Details />
+              <Location />
               <Rsvp />
               <Footer />
             </motion.div>

@@ -67,6 +67,13 @@ export function buildCalendarUrl() {
   return `data:text/calendar;charset=utf8,${encodeURIComponent(body)}`;
 }
 
-export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  wedding.venue.mapQuery,
-)}`;
+const q = encodeURIComponent(wedding.venue.mapQuery);
+
+// Opens the place in Google Maps.
+export const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${q}`;
+
+// Opens turn-by-turn directions to the venue (uses the guest's location as start).
+export const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${q}`;
+
+// Keyless Google Maps embed — safe to iframe without an API key.
+export const mapEmbedUrl = `https://maps.google.com/maps?q=${q}&z=14&output=embed`;

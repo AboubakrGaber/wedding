@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+/* ---- Design tokens ---------------------------------------------------- */
+@theme {
+  --color-cream: #fbf7f0;
+  --color-cream-deep: #f3e9d9;
+  --color-parchment: #f7efe2;
+
+  --color-blush: #e6bcb6;
+  --color-blush-soft: #f0d8d2;
+  --color-rose: #cf9797;
+  --color-rose-deep: #bd8080;
+
+  --color-sage: #9faa86;
+  --color-sage-deep: #7f8d68;
+  --color-sage-soft: #c3ceb0;
+
+  --color-gold: #b18a5c;
+  --color-gold-deep: #99713f;
+
+  --color-ink: #6c5744;
+  --color-ink-soft: #8b7660;
+
+  --font-display: var(--font-cormorant), Georgia, serif;
+  --font-body: var(--font-eb-garamond), Georgia, serif;
+  --font-script: var(--font-great-vibes), cursive;
+}
+
+/* ---- Base ------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Comfortable tap targets on touch devices */
+button,
+a {
+  touch-action: manipulation;
+}
+
+/* Layered paper + soft floral wash */
+.paper {
+  background-color: var(--color-cream);
+  background-image:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      rgba(230, 188, 182, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      90% 60% at 100% 100%,
+      rgba(159, 170, 134, 0.14),
+      transparent 55%
+    ),
+    radial-gradient(
+      70% 50% at 0% 90%,
+      rgba(230, 188, 182, 0.12),
+      transparent 55%
+    );
+}
+
+/* Subtle grain so the flat cream reads like textured paper */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Typographic helpers --------------------------------------------- */
+.tracking-widest-xl {
+  letter-spacing: 0.42em;
+}
+.tracking-wide-caps {
+  letter-spacing: 0.28em;
+}
+
+.name-serif {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 0.95;
+}
+
+.script {
+  font-family: var(--font-script);
+}
+
+/* Thin gold hairline used to divide details */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold),
+    transparent
+  );
+}
+
+/* ---- Animations ------------------------------------------------------- */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2.2deg);
+  }
+  50% {
+    transform: rotate(2.2deg);
+  }
+}
+.sway {
+  transform-origin: top center;
+  animation: sway 7s ease-in-out infinite;
+}
+.sway-slow {
+  transform-origin: bottom center;
+  animation: sway 10s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .sway,
+  .sway-slow {
+    animation: none;
+  }
+}
+
+/* Draw-in path for the arch */
+.draw-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 2.6s ease-out 0.3s forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
